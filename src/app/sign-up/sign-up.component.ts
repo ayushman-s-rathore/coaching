@@ -10,10 +10,11 @@ import { DataServiceService } from '../data-service.service';
 })
 export class SignUpComponent {
   users: any;
+
   constructor(private userData: DataServiceService ){
-    this.userData.users().subscribe((data)=>{
-      console.log("data", data);
-    })
+    // this.userData.users().subscribe((data)=>{
+    //   console.log("data", data);
+    // })
   }
  
 

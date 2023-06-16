@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataServiceService } from '../data-service.service';
+import { Coachee } from '../models/coachee.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,20 +10,30 @@ import { DataServiceService } from '../data-service.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-  users: any;
-
-  constructor(private userData: DataServiceService ){
+  user: Coachee= new Coachee();
+  @ViewChild('user')
+  coacheeData!: NgForm;
+  constructor(private userService: DataServiceService ){
     // this.userData.users().subscribe((data)=>{
     //   console.log("data", data);
     // })
   }
+  
  
 
-  onSubmit(data: any){
-    console.log(data);
-    this.userData.postData(data).
-    subscribe(resp =>{
-      console.log(resp);
-    })
+  onSubmit(){
+    // console.log(data);
+    // this.userData.postData(data).
+    // subscribe(resp =>{
+    //   console.log(resp);
+    // })
+    this.user.name=this.coacheeData.value.name;
+    this.user.email=this.coacheeData.value.email;
+    this.user.password=this.coacheeData.value.password;
+    this.userService.postData(this.user).subscribe(
+      data => {
+        console.log(data);
+      }
+    )
   }
 }

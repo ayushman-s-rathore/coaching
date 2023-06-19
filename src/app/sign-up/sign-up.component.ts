@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataServiceService } from '../data-service.service';
 import { Coachee } from '../models/coachee.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,8 @@ export class SignUpComponent {
   user: Coachee= new Coachee();
   @ViewChild('user')
   coacheeData!: NgForm;
-  constructor(private userService: DataServiceService ){
+  constructor(private userService: DataServiceService,
+              private router: Router ){
     // this.userData.users().subscribe((data)=>{
     //   console.log("data", data);
     // })
@@ -22,11 +24,6 @@ export class SignUpComponent {
  
 
   onSubmit(){
-    // console.log(data);
-    // this.userData.postData(data).
-    // subscribe(resp =>{
-    //   console.log(resp);
-    // })
     this.user.name=this.coacheeData.value.name;
     this.user.email=this.coacheeData.value.email;
     this.user.password=this.coacheeData.value.password;
@@ -35,5 +32,7 @@ export class SignUpComponent {
         console.log(data);
       }
     )
+    this.router.navigate(['/email']);
+
   }
 }

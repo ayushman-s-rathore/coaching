@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { CoachSignupComponent } from './sign-up/coach-signup/coach-signup.component';
+import { EmailAuthComponent } from './sign-up/email-auth/email-auth.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { CoachSignupComponent } from './sign-up/coach-signup/coach-signup.compon
     AppComponent,
     SignUpComponent,
     CoachSignupComponent,
+    EmailAuthComponent,
   
   ],
   imports: [

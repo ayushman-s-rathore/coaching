@@ -19,11 +19,11 @@ export class CoachSignupComponent {
   }
 
   onSubmit(){
-    
+    const cUrl= "coachSignUp";
     this.user.name=this.coachData.value.name;
     this.user.email=this.coachData.value.email;
     this.user.password=this.coachData.value.password;
-    this.userService.postData(this.user).subscribe(
+    this.userService.postData(cUrl,this.user).subscribe(
       data => {
         console.log(data);
       }

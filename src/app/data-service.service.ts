@@ -13,7 +13,7 @@ export class DataServiceService {
   //   return this.http.get('https://localhost:8080');
   // }
 
-  postData(data: any): Observable<any> {
-    return this.http.post<any>('api/signup/signup/success', data);
+  postData(url: string,data: any): Observable<any> {
+    return this.http.post<any>('api/newCoaching/'+url, data);
   }
 }

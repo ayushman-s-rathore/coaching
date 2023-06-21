@@ -24,15 +24,16 @@ export class SignUpComponent {
  
 
   onSubmit(){
+    const cUrl="coacheeSignUp"
     this.user.name=this.coacheeData.value.name;
     this.user.email=this.coacheeData.value.email;
     this.user.password=this.coacheeData.value.password;
-    this.userService.postData(this.user).subscribe(
+    this.userService.postData(cUrl,this.user).subscribe(
       data => {
         console.log(data);
       }
     )
-    this.router.navigate(['/email']);
+  
 
   }
 }

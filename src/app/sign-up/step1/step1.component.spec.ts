@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmailAuthComponent } from './email-auth.component';
+import { Step1Component } from './step1.component';
 
-describe('EmailAuthComponent', () => {
-  let component: EmailAuthComponent;
-  let fixture: ComponentFixture<EmailAuthComponent>;
+describe('Step1Component', () => {
+  let component: Step1Component;
+  let fixture: ComponentFixture<Step1Component>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EmailAuthComponent]
+      declarations: [Step1Component]
     });
-    fixture = TestBed.createComponent(EmailAuthComponent);
+    fixture = TestBed.createComponent(Step1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

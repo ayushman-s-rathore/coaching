@@ -1,0 +1,82 @@
+<div class="container mt-5">
+    <div class="row justify-content-end">
+        <div class="col-md-6">
+            <div>
+                <label for="profilePicture">Choose your Profile Picture: </label><br>
+                <input type="file" (change)="onFileSelected($event)">
+                <button (click)="onUpload()">Upload</button>
+            </div><br>
+            <form (ngSubmit)="onSubmit()" #user="ngForm">
+                <div class="form-group">
+                  <label for="about-me">About Me:</label>
+                  <input 
+                  type="text" 
+                  class="form-control" 
+                  id="name" 
+                  name="name"
+                  ngModel
+                  required>
+                </div>
+                <div>
+                    <label for="profilePicture">Choose your Intro Video: </label><br>
+                    <input type="file" (change)="onFileSelected($event)">
+                    <button (click)="onUpload()">Upload</button>
+                </div><br>
+                <div class="form-group">
+                    <label for="about-me">Country:</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name"
+                    ngModel
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="about-me">State:</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name"
+                    ngModel
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="about-me">City:</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name"
+                    ngModel
+                    required>
+                </div>
+                <div class="form-group">
+                    <label for="about-me">Set TimeZone:</label>
+                    <input 
+                    type="text" 
+                    class="form-control" 
+                    id="name" 
+                    name="name"
+                    ngModel
+                    required>
+                </div>
+                <div class="form-group">
+                    <select id="gender" name="gender" [(ngModel)]="selectedGender">
+                    <option value="">-- Select Gender --</option>
+                    <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                    </select>
+                </div>
+                <div class="row justify-content-end mt-5">
+                    <button 
+                    type="submit" 
+                    class="btn btn-primary btn-block col-md-3">
+                    Next</button>
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+</div>

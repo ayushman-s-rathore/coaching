@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SignupService } from '../signup.service';
+import { NgForm } from '@angular/forms';
+import { Country,State,City } from 'country-state-city';
+
+
+
+
+
 
 @Component({
   selector: 'app-step1',
@@ -7,17 +14,32 @@ import { SignupService } from '../signup.service';
   styleUrls: ['./step1.component.css']
 })
 export class Step1Component implements OnInit {
-  countries: {name: string}[]=[];
+  @ViewChild('country') country!: ElementRef 
   genders: string[]=['Male','Female','Other'];
+  socialMedias: string[]=['Linkedin','Github','Other'];
+  socialHandle: {name: string, link: string}[]=[];
+  countries: {name:string, isoCode: string}[]=[];
+  states: {name:string, isoCode: string}[]=[];
+  cities:{name:string}[]=[];
+
+  selectedCountry: any;
+  selectedState:any;
+  selectedCity:any;
+
+  
   selectedGender: string='';
+  selectedSocial: string='';
+  socialLink!: string ;
+  
 
 
-  constructor(private signupService: SignupService){
-
+  constructor(private signupService: SignupService){       
   }
-
+  
   ngOnInit(): void {
-      this.countries=this.signupService.getCountries()
+    this.countries = Country.getAllCountries();
+    
+      
   }
 
   selectedFile: File | null = null;
@@ -41,6 +63,34 @@ export class Step1Component implements OnInit {
     }
   }
 
+  onAdd(){
+    const name=this.selectedSocial;
+    const link=this.socialLink;
+    this.socialHandle.push({name,link});
+  }
 
-    onSubmit(){}
+  onCountryChange(): void {
+    console.log(this.selectedCountry);
+    this.states=State.getStatesOfCountry(this.selectedCountry);
+    // this.states = State.getStatesOfCountry(JSON.parse(this.country.nativeElement.value).isoCode);
+    // this.selectedCountry = JSON.parse(this.country.nativeElement.value);
+    // this.cities = this.selectedState = this.selectedCity = null;
+  }
+
+  onStateChange() {
+    this.cities=City.getCitiesOfState(this.selectedCountry,this.selectedState);
+    
+  }
+
+  
+
+  
+
+
+  
+
+
+    onSubmit(data: NgForm){
+      console.log(data);
+    }
 }

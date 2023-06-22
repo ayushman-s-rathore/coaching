@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataServiceService } from 'src/app/data-service.service';
 import { Coach } from 'src/app/models/coach.model';
 
@@ -12,7 +13,8 @@ export class CoachSignupComponent {
   user: Coach= new Coach();
   @ViewChild('user')
   coachData!: NgForm;
-  constructor(private userService: DataServiceService ){
+  constructor(private userService: DataServiceService,
+              private router: Router ){
     // this.userData.users().subscribe((data)=>{
     //   console.log("data", data);
     // })
@@ -28,6 +30,7 @@ export class CoachSignupComponent {
         console.log(data);
       }
     )
+    this.router.navigate(['/step1']);
   }
 
 }

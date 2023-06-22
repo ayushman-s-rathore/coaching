@@ -7,6 +7,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule } from '@angular/forms';
 import { CoachSignupComponent } from './sign-up/coach-signup/coach-signup.component';
 import { Step1Component } from './sign-up/step1/step1.component';
+import { Step2Component } from './sign-up/step2/step2.component';
+import { Step3Component } from './sign-up/step3/step3.component';
 
 
 
@@ -15,7 +17,9 @@ import { Step1Component } from './sign-up/step1/step1.component';
     AppComponent,
     SignUpComponent,
     CoachSignupComponent,
-    Step1Component
+    Step1Component,
+    Step2Component,
+    Step3Component
   
   
   ],

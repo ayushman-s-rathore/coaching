@@ -6,59 +6,52 @@
                 <input type="file" (change)="onFileSelected($event)">
                 <button (click)="onUpload()">Upload</button>
             </div><br>
-            <form (ngSubmit)="onSubmit()" #user="ngForm">
+            <form (ngSubmit)="onSubmit(user)" #user="ngForm" >
                 <div class="form-group">
                   <label for="about-me">About Me:</label>
-                  <input 
+                  <textarea 
                   type="text" 
                   class="form-control" 
-                  id="name" 
-                  name="name"
+                  id="aboutMe" 
+                  name="aboutMe"
                   ngModel
-                  required>
+                  rows="6"></textarea>
                 </div>
                 <div>
-                    <label for="profilePicture">Choose your Intro Video: </label><br>
+                    <label for="introVideo">Choose your Intro Video: </label><br>
                     <input type="file" (change)="onFileSelected($event)">
                     <button (click)="onUpload()">Upload</button>
                 </div><br>
                 <div class="form-group">
-                    <label for="about-me">Country:</label>
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    id="name" 
-                    name="name"
-                    ngModel
-                    required>
-                </div>
-                <div class="form-group">
-                    <label for="about-me">State:</label>
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    id="name" 
-                    name="name"
-                    ngModel
-                    required>
-                </div>
-                <div class="form-group">
-                    <label for="about-me">City:</label>
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    id="name" 
-                    name="name"
-                    ngModel
-                    required>
-                </div>
+                    <label for="country">Country:</label>
+                    <select id="country" name="country" [(ngModel)]="selectedCountry" 
+                     (change)="onCountryChange()">
+                      <option value="">-- Select Country --</option>
+                      <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="state">State:</label>
+                    <select id="state" name="state" [(ngModel)]="selectedState" (ngModelChange)="onStateChange()" [disabled]="!selectedCountry">
+                      <option value="">-- Select State --</option>
+                      <option *ngFor="let state of states" [value]="state.isoCode">{{ state.name }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="city">City:</label>
+                    <select id="city" name="city" [(ngModel)]="selectedCity"  [disabled]="!selectedState">
+                      <option value="">-- Select City --</option>
+                      <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
+                    </select>
+                  </div>
                 <div class="form-group">
                     <label for="about-me">Set TimeZone:</label>
                     <input 
                     type="text" 
                     class="form-control" 
-                    id="name" 
-                    name="name"
+                    id="timeZone" 
+                    name="timeZone"
                     ngModel
                     required>
                 </div>
@@ -68,12 +61,34 @@
                     <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <select id="social" name="social" [(ngModel)]="selectedSocial">
+                    <option value="">-- Select your Social Handle --</option>
+                    <option *ngFor="let acc of socialMedias" [value]="acc">{{ acc }}</option>
+                    </select>
+                    <input 
+                    type="url" 
+                    id="socialLink" 
+                    name="socialLink"
+                    [(ngModel)]="socialLink">
+                    <button type="button" class="btn btn-primary" (click)="onAdd()">Add</button>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <ul class="list-group">
+                            <li class="list-group-item"
+                            *ngFor="let social of socialHandle">
+                            {{social.name}} {{social.link}} </li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="row justify-content-end mt-5">
                     <button 
                     type="submit" 
                     class="btn btn-primary btn-block col-md-3">
                     Next</button>
                 </div>
+                
 
                 
             </form>

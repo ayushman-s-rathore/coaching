@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { SignupService } from '../signup.service';
 import { NgForm } from '@angular/forms';
 import { Country,State,City } from 'country-state-city';
+import { Timezones } from 'country-state-city/lib/interface';
 
 
 
@@ -14,7 +15,7 @@ import { Country,State,City } from 'country-state-city';
   styleUrls: ['./step1.component.css']
 })
 export class Step1Component implements OnInit {
-  @ViewChild('country') country!: ElementRef 
+  
   genders: string[]=['Male','Female','Other'];
   socialMedias: string[]=['Linkedin','Github','Other'];
   socialHandle: {name: string, link: string}[]=[];
@@ -25,6 +26,7 @@ export class Step1Component implements OnInit {
   selectedCountry: any;
   selectedState:any;
   selectedCity:any;
+  timeZone!: string;
 
   
   selectedGender: string='';
@@ -70,11 +72,12 @@ export class Step1Component implements OnInit {
   }
 
   onCountryChange(): void {
-    console.log(this.selectedCountry);
+    let time: Timezones[]=[];
     this.states=State.getStatesOfCountry(this.selectedCountry);
-    // this.states = State.getStatesOfCountry(JSON.parse(this.country.nativeElement.value).isoCode);
-    // this.selectedCountry = JSON.parse(this.country.nativeElement.value);
-    // this.cities = this.selectedState = this.selectedCity = null;
+    time=Country.getCountryByCode(this.selectedCountry)?.timezones as Timezones[];
+    this.timeZone=time[0].gmtOffsetName;  
+    
+    
   }
 
   onStateChange() {

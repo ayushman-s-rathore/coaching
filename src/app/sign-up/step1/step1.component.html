@@ -7,6 +7,8 @@
                 <button (click)="onUpload()">Upload</button>
             </div><br>
             <form (ngSubmit)="onSubmit(user)" #user="ngForm" >
+                <fieldset>
+
                 <div class="form-group">
                   <label for="about-me">About Me:</label>
                   <textarea 
@@ -22,70 +24,93 @@
                     <input type="file" (change)="onFileSelected($event)">
                     <button (click)="onUpload()">Upload</button>
                 </div><br>
-                <div class="form-group">
-                    <label for="country">Country:</label>
-                    <select id="country" name="country" [(ngModel)]="selectedCountry" 
-                     (change)="onCountryChange()">
+                <div class="row mx-1">
+                    <div class="col-xs-6 form-group">
+                
+                    <label for="country">Country:</label><br>
+                    <select 
+                    id="country" 
+                    name="country" 
+                    [(ngModel)]="selectedCountry" 
+                     (change)="onCountryChange()"
+                     required>
                       <option value="">-- Select Country --</option>
                       <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                     </select>
-                  </div>
                   
-                  <div class="form-group">
-                    <label for="state">State:</label>
-                    <select id="state" name="state" [(ngModel)]="selectedState" (ngModelChange)="onStateChange()" [disabled]="!selectedCountry">
+                </div> 
+                 <div class="col-xs-6 mx-4   form-group">                                   
+                    <label for="state">State:</label><br>
+                    <select id="state" name="state" [(ngModel)]="selectedState" (ngModelChange)="onStateChange()" [disabled]="!selectedCountry" required="">
                       <option value="">-- Select State --</option>
                       <option *ngFor="let state of states" [value]="state.isoCode">{{ state.name }}</option>
                     </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="city">City:</label>
-                    <select id="city" name="city" [(ngModel)]="selectedCity"  [disabled]="!selectedState">
+                  </div> 
+              </div>
+              <div class="row mx-1">
+                  <div class="col-xs-6 form-group">
+                    <label for="city">City:</label><br>
+                    <select id="city" name="city" [(ngModel)]="selectedCity"  [disabled]="!selectedState" required>
                       <option value="">-- Select City --</option>
                       <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
                     </select>
-                  </div>
-                <div class="form-group">
-                    <label for="about-me">Set TimeZone:</label>
+                </div>
+                
+                <div class="form-group col-xs-6 mx-5">
+                    <label for="timeZone">Set Timezone:</label>
                     <input 
                     type="text" 
                     class="form-control" 
                     id="timeZone" 
                     name="timeZone"
-                    ngModel
+                    [(ngModel)]="timeZone"
+                    value="timeZone"
                     required>
                 </div>
+             </div>
                 <div class="form-group">
-                    <select id="gender" name="gender" [(ngModel)]="selectedGender">
+                    <select id="gender" name="gender" [(ngModel)]="selectedGender" required>
                     <option value="">-- Select Gender --</option>
                     <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <select id="social" name="social" [(ngModel)]="selectedSocial">
-                    <option value="">-- Select your Social Handle --</option>
+                    <select 
+                    id="social" 
+                    name="social" 
+                    #sAcc="ngModel"
+                    [(ngModel)]="selectedSocial">
+                    <option value="">-- Choose an Account --</option>
                     <option *ngFor="let acc of socialMedias" [value]="acc">{{ acc }}</option>
                     </select>
-                    <input 
+                    <input
+                    class="mx-3" 
                     type="url" 
                     id="socialLink" 
                     name="socialLink"
+                    #sLink="ngModel"
                     [(ngModel)]="socialLink">
-                    <button type="button" class="btn btn-primary" (click)="onAdd()">Add</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-primary" 
+                    (click)="onAdd()"
+                    [disabled]="sLink.pristine || sAcc.pristine">Add</button>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <ul class="list-group">
+                    <div class="col form-group">
+                        <ul class="list-group ">
                             <li class="list-group-item"
                             *ngFor="let social of socialHandle">
                             {{social.name}} {{social.link}} </li>
                         </ul>
                     </div>
                 </div>
+            </fieldset>
                 <div class="row justify-content-end mt-5">
                     <button 
                     type="submit" 
-                    class="btn btn-primary btn-block col-md-3">
+                    class="btn btn-primary btn-block col-md-3"
+                    [disabled]="!user.valid">
                     Next</button>
                 </div>
                 

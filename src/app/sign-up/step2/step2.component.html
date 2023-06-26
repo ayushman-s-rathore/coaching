@@ -1,1 +1,138 @@
-<p>step2 works!</p>
+<div class="container mt-5">
+  <div class="row justify-content-end">
+    <div class="col-md-6">
+      <div class="d-flex flex-column h-100">
+      <div class="flex-grow-1">
+      <h4>Education</h4>
+      <ul class="list-group">
+        <li class="list-group-item"
+        *ngFor="let edu of education; let id= index">
+      {{edu.name}} {{edu.degree}} 
+      <button type="button" class="btn btn-danger float-right" (click)="deleteEdu(id)">X</button>
+      </li>
+      </ul>
+     </div>
+   
+    
+      <div class="mt-auto ">
+      <h4>Work Experience</h4>
+      <ul class="list-group">
+        <li class="list-group-item"
+        *ngFor="let exp of experience; let id= index">
+      {{exp.name}} {{exp.title}} 
+      <button type="button" class="btn btn-danger float-right" (click)="deleteExp(id)">X</button>
+      </li>
+      </ul>
+    </div>
+    </div>
+    </div>
+ 
+        <div class="col-md-6">
+            <form [formGroup]="step2Form" (ngSubmit)="onSubmit()">
+              <h4>Education:</h4>
+              <div class="row">
+             
+                <label for="school" class="col-sm-4 col-form-label">School Name:</label>
+               <div class="col-sm-7">
+                <input                 
+                type="text"
+                id="schoolName"
+                class="form-control "
+                formControlName="schoolName">
+               </div>
+              
+              
+                <label for="degree" class="col-sm-4 col-form-label mt-1">Degree:</label>
+                <div class="col-sm-7 mt-1">
+                <input type="text"
+                id="degree"
+                class="form-control"
+                formControlName="degree">
+                </div>
+              
+              
+                <label for="specialization" class="col-sm-4 col-form-label mt-1">Specialization:</label>
+                <div class="col-sm-7 mt-1">
+                <input type="text"
+                id="specialization"
+                class="form-control"
+                formControlName="specialization">
+               </div>
+              
+                <label for="duration" class="col-sm-4 col-form-label mt-1">Duration:</label>
+                <div class="col-sm-3 mt-1">
+                <input type="text"
+                id="stdate"
+                class="form-control"
+                formControlName="stDate">
+                
+                </div>
+                <label for="-" class="col-sm-1 mt-1" >-</label>
+                <div class="col-sm-3 mt-1">
+                <input
+                 type="text"
+                 id="enddate"
+                 class="form-control"
+                 formControlName="endDate">
+                </div>
+               <div class="col-sm-1 ">
+                <button type="button" class="btn btn-primary" (click)="onAddEducation()">Add</button>
+               </div>
+              </div>
+            <h4 class="mt-4">Employee title:</h4>
+            <div class="row mt-4">
+              
+                <label for="empTitle" class="col-sm-4 col-form-label">Employee title:</label>
+                <div class="col-sm-7">
+                <input type="text" id="empTitle" class="form-control" formControlName="employeeTitle">
+               </div>
+              </div>
+            <h4 class="mt-4">Work Experience:</h4>
+            <div class="row">
+                
+                  <label for="organization" class="mt-2 col-sm-4 col-form-label ">Organization Name:</label>
+                  <div class="mt-2 col-sm-7">
+                  <input type="text"
+                  id="organizationName"
+                  class="mt-2 form-control"
+                  formControlName="orgName">
+                 </div>
+                  <label for="title" class="mt-2 col-sm-4 col-form-label">Title:</label>
+                  <div class="mt-2 col-sm-7">
+                  <input type="text"
+                  id="title"
+                  class="mt-2 form-control"
+                  formArrayName="title">
+                </div>
+                  <label for="description" class="mt-2 col-sm-4 col-form-label">Description:</label>
+                  <div class="mt-2 col-sm-7">
+                  <input type="text"
+                  id="description"
+                  class="mt-2 form-control"
+                  formControlName="description">
+                </div>
+                  <label for="duration" class="mt-2 col-sm-4 col-form-label">Duration:</label>
+                  <div class="mt-2 col-sm-3">
+                  <input type="text" id="start" class=" form-control" formControlName="stDate">
+                </div>
+                <label for="-" class="col-sm-1 mt-2 " >-</label>
+                <div class="mt-2 col-sm-3">
+                <input type="text" id="end" class="form-control" formControlName="endDate">
+                </div>
+                <div class="col-sm-1">
+                  <button type="button" class="btn btn-primary" (click)="onAddWorkExp()">Add</button>
+                </div>
+              </div>
+              <div class="row justify-content-end mt-5">
+                <button 
+                type="submit" 
+                class="btn btn-primary btn-block col-md-3">
+                Next</button>
+            </div>
+
+              
+
+            </form>
+        </div>
+    </div>
+</div>

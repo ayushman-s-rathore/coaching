@@ -3,6 +3,7 @@ import { SignupService } from '../signup.service';
 import { NgForm } from '@angular/forms';
 import { Country,State,City } from 'country-state-city';
 import { Timezones } from 'country-state-city/lib/interface';
+import { Router } from '@angular/router';
 
 
 
@@ -35,7 +36,8 @@ export class Step1Component implements OnInit {
   
 
 
-  constructor(private signupService: SignupService){       
+  constructor(private signupService: SignupService,
+              private router:Router){       
   }
   
   ngOnInit(): void {
@@ -95,5 +97,6 @@ export class Step1Component implements OnInit {
 
     onSubmit(data: NgForm){
       console.log(data);
+      this.router.navigate(['/step2']);
     }
 }

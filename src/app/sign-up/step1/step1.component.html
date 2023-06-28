@@ -41,7 +41,10 @@
                 </div> 
                  <div class="col-xs-6 mx-4   form-group">                                   
                     <label for="state">State:</label><br>
-                    <select id="state" name="state" [(ngModel)]="selectedState" (ngModelChange)="onStateChange()" [disabled]="!selectedCountry" required="">
+                    <select id="state" name="state" [(ngModel)]="selectedState" 
+                    (ngModelChange)="onStateChange()" 
+                    [disabled]="!selectedCountry" 
+                    required>
                       <option value="">-- Select State --</option>
                       <option *ngFor="let state of states" [value]="state.isoCode">{{ state.name }}</option>
                     </select>
@@ -50,7 +53,10 @@
               <div class="row mx-1">
                   <div class="col-xs-6 form-group">
                     <label for="city">City:</label><br>
-                    <select id="city" name="city" [(ngModel)]="selectedCity"  [disabled]="!selectedState" required>
+                    <select id="city" name="city"
+                     [(ngModel)]="selectedCity"  
+                     [disabled]="!selectedState" 
+                     >
                       <option value="">-- Select City --</option>
                       <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
                     </select>
@@ -112,10 +118,7 @@
                     class="btn btn-primary btn-block col-md-3"
                     [disabled]="!user.valid">
                     Next</button>
-                </div>
-                
-
-                
+                </div>             
             </form>
         </div>
     </div>

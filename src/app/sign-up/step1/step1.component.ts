@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Country,State,City } from 'country-state-city';
 import { Timezones } from 'country-state-city/lib/interface';
 import { Router } from '@angular/router';
+import { DataServiceService } from 'src/app/data-service.service';
 
 
 
@@ -37,7 +38,8 @@ export class Step1Component implements OnInit {
 
 
   constructor(private signupService: SignupService,
-              private router:Router){       
+              private router:Router,
+              private dataService: DataServiceService){       
   }
   
   ngOnInit(): void {
@@ -97,6 +99,7 @@ export class Step1Component implements OnInit {
 
     onSubmit(data: NgForm){
       console.log(data);
+      this.dataService.postData('',data);
       this.router.navigate(['/step2']);
     }
 }

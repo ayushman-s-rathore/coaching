@@ -1,5 +1,5 @@
 <div class="container mt-5">
-<div class="row justify-content-end">
+<div class="row">
     <div class="col-md-6">
       <div class="d-flex flex-column h-100">
       <div class="flex-grow-1">
@@ -14,13 +14,13 @@
     </div>
 
     
-      <div class="mt-auto ">
+      <div class="flex-grow-1">
       <h4>Work Experience</h4>
       <ul class="list-group">
         <li class="list-group-item"
         *ngFor="let exp of experience; let id= index">
       {{exp.name}} {{exp.title}} 
-      <button type="button" class="btn btn-danger float-right" (click)="deleteExp(id)">X</button>
+      <button type="button" class="btn btn-danger btn-sm float-right" (click)="deleteExp(id)">X</button>
       </li>
       </ul>
     </div>
@@ -29,6 +29,40 @@
 
       <div class="col-md-6">
           <form [formGroup]="step2Form" (ngSubmit)="onSubmit()">
+            <div formGroupName="accInfo">
+              <select 
+              id="social" 
+              name="social" 
+              formControlName="accType">
+              <option value="">-- Choose an Account --</option>
+              <option value="Linkedin">Linkedin</option>
+              <option value="Github">Github</option>
+              <option value="Other">Other</option>
+                
+            </select>
+              <input
+              class="mx-3" 
+              type="url" 
+              id="socialLink" 
+              formControlName="accLink"             
+              >
+              <button 
+              type="button" 
+              class="btn btn-primary" 
+              (click)="onAddAcc()"
+              >Add</button>
+            
+          </div>
+          <div class="row">
+              <div class="col form-group">
+                  <ul class="list-group ">
+                      <li class="list-group-item"
+                      *ngFor="let social of accounts; let id=index">
+                      {{social.name}} {{social.link}} 
+                      <button type="button" class="btn btn-danger float-right" (click)="deleteAcc(id)">X</button></li>
+                  </ul>
+              </div>
+          </div>
             <h4>Education:</h4>
             <div formGroupName="schoolInfo">
               <div class="row">
@@ -85,6 +119,7 @@
                 [disabled]="!step2Form.get('schoolInfo')?.valid">Add</button>
               </div>
               </div>
+              <span class="help-block"  *ngIf="step2Form.get('schoolInfo')?.touched">Education feild can not remain empty</span>
 
             </div>
           <h4 class="mt-4">Employee title:</h4>
@@ -138,6 +173,7 @@
                 [disabled]="!step2Form.get('workInfo')?.valid">Add</button>
               </div>
             </div>
+            <span class="help-block" *ngIf="step2Form.get('workInfo')?.touched">Work Experience feild can not remain empty</span>
             </div>
           
             <div class="row justify-content-end mt-5">

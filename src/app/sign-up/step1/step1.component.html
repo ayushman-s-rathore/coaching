@@ -31,17 +31,23 @@
                     <select 
                     id="country" 
                     name="country" 
+                    class="form-control"
                     [(ngModel)]="selectedCountry" 
                      (change)="onCountryChange()"
                      required>
                       <option value="">-- Select Country --</option>
                       <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                     </select>
+                    <span class="help-block" >Country is Required</span>
                   
                 </div> 
                  <div class="col-xs-6 mx-4   form-group">                                   
                     <label for="state">State:</label><br>
-                    <select id="state" name="state" [(ngModel)]="selectedState" 
+                    <select 
+                    id="state" 
+                    name="state" 
+                    class="form-control"
+                    [(ngModel)]="selectedState" 
                     (ngModelChange)="onStateChange()" 
                     [disabled]="!selectedCountry" 
                     required>
@@ -54,6 +60,7 @@
                   <div class="col-xs-6 form-group">
                     <label for="city">City:</label><br>
                     <select id="city" name="city"
+                     class="form-control"
                      [(ngModel)]="selectedCity"  
                      [disabled]="!selectedState" 
                      >
@@ -75,10 +82,13 @@
                 </div>
              </div>
                 <div class="form-group">
-                    <select id="gender" name="gender" [(ngModel)]="selectedGender" required>
+                    <select id="gender" name="gender" [(ngModel)]="selectedGender"
+                   
+                    required>
                     <option value="">-- Select Gender --</option>
                     <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
-                    </select>
+                    </select><br>
+                    <span class="help-block" >required</span>
                 </div>
                 <div class="form-group">
                     <select 

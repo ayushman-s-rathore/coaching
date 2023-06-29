@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataServiceService } from 'src/app/data-service.service';
 
 @Component({
   selector: 'app-step2',
@@ -11,11 +12,18 @@ export class Step2Component implements OnInit {
   step2Form!: FormGroup
   education: {name:string, degree:string, specialization:string,start:string, end:string}[]=[];
   experience: {name:string, title:string, description:string,start:string, end:string}[]=[];
+  accounts: {name:string, link:string}[]=[];
 
-  constructor(private router:Router){}
+  constructor(private router:Router,
+    private dataService: DataServiceService){}
+
 
   ngOnInit(): void {
       this.step2Form= new FormGroup({
+        'accInfo': new FormGroup({
+          'accType': new FormControl(''),
+          'accLink': new FormControl(''),
+        }),
         'schoolInfo': new FormGroup({
         'schoolName': new FormControl('', Validators.required),
         'stDate': new FormControl('',Validators.required),
@@ -31,13 +39,18 @@ export class Step2Component implements OnInit {
         'title': new FormControl('',Validators.required),
         'description': new FormControl('',Validators.required),
         }),
-        
+        'accounts': new FormArray([]),
         'qualification': new FormArray([]),
         'workExperience': new FormArray([]),
       });
   }
   
-  
+  onAddAcc(){
+    const name=this.step2Form.value.accInfo.accType;
+    const link=this.step2Form.value.accInfo.accLink;
+    this.accounts.push({name,link});
+
+  }
 
   onAddEducation(){
     const name=this.step2Form.value.schoolInfo.schoolName;
@@ -83,6 +96,18 @@ export class Step2Component implements OnInit {
     items.push(newObject);
   })
   }
+  addAccounts(){
+    const items=<FormArray>this.step2Form.get('accounts');
+
+  this.accounts.forEach((item)=>{
+    const newObject = new FormGroup({
+      name: new FormControl(item.name),
+      link: new FormControl(item.link),
+    });
+    items.push(newObject);
+  })
+
+  }
 
   deleteEdu(id:number){
     this.education.splice(id,1);
@@ -91,8 +116,12 @@ export class Step2Component implements OnInit {
     this.experience.splice(id,1);
 
   }
+  deleteAcc(id:number){
+    this.accounts.splice(id,1);
+  }
 
   onSubmit(){
+    this.addAccounts();
     this.addEduToForm();
     this.addExpToForm();
     console.log(this.step2Form);

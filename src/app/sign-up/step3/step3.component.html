@@ -7,11 +7,12 @@
                 <label for="experience" class="col-form-label">Coaching Experience:</label>
                 <select id="experience" formControlName="years" class="form-control">
                     <option value="">--Years--</option>
-                    <option value="1">1 year</option>
-                    <option value="2">2 year</option>
+                    <option value="1">0-1 year</option>
+                    <option value="2">1-2 year</option>
                     <option value="3">2-5 year</option>
                     <option value="5+">5+ year</option>
                 </select>
+                <span class="help-block">required</span>
              </div>
              <div class="col-md-6">
                 <label for="mode" class="col-form-label">Mode of Coaching:</label>
@@ -21,6 +22,7 @@
                     <option value="video">Video Call</option>
                     <option value="person">In Person</option>
                 </select>
+                <span class="help-block">required</span>
               </div>
              </div>
              <div class="row mt-4 ">
@@ -44,64 +46,68 @@
               </div>
             </div>
             </div>
-            <div formGroupName="doc">
-              <div class="row">
-                <label for="documents" class="mt-4 col-sm-4">Select an Document:</label>
-                <select id="documents" formControlName="document" class="form-control mt-4 col-sm-4">
-                    <option value="">--Documets if any--</option>
-                    <option value="certificate">Certificate</option>
-                    <option value="publication">Publication</option>
-                    <option value="credential">Credential</option>
-                </select>
-            </div>
+            <fieldset >
+              <div formGroupName="doc">
                 <div class="row">
-                  <label for="title" class="mt-2 col-sm-4 col-form-label">Title:</label>
-                  <div class="mt-2 col-sm-7">
-                    <input                 
-                    type="text"
-                    id="title"
-                    class="form-control "
-                    formControlName="title">
+                  <label for="documents" class="mt-4 col-sm-4">Select an Document:</label>
+                  <select id="documents" formControlName="document" class="form-control mt-4 col-sm-4">
+                      <option value="">--Documets if any--</option>
+                      <option value="certificate">Certificate</option>
+                      <option value="publication">Publication</option>
+                      <option value="credential">Credential</option>
+                  </select>
+              </div>
+                  <div class="row">
+                    <label for="title" class="mt-2 col-sm-4 col-form-label">Title:</label>
+                    <div class="mt-2 col-sm-7">
+                      <input                 
+                      type="text"
+                      id="title"
+                      class="form-control "
+                      formControlName="title">
+                    </div>
+                    <label for="organization" class="mt-2 col-sm-4 col-form-label">Issuing Organization:</label>
+                    <div class="mt-2 col-sm-7">
+                      <input                 
+                      type="text"
+                      id="organization"
+                      class="form-control "
+                      formControlName="org">
+                    </div>
+                    <label for="type" class="mt-2 col-sm-4 col-form-label">Type:</label>
+                    <div class="mt-2 col-sm-7">
+                      <input                 
+                      type="text"
+                      id="type"
+                      class="form-control "
+                      formControlName="type">
+                    </div>
+                    <label for="valid" class="mt-2 col-sm-4 col-form-label">Valid Till:</label>
+                    <div class="mt-2 col-sm-7">
+                      <input                 
+                      type="date"
+                      id="valid"
+                      class="form-control "
+                      formControlName="valid">
+                    </div>
+                    <div class="mt-2 col-sm-11">
+                    <input 
+                    type="link" 
+                    id="verification" 
+                    class="form-control"
+                    formControlName="verificationLink"
+                    placeholder="Verification Link">
+                    </div>
+                    <div class="col-sm-1 ">
+                      <button type="button" class="btn btn-primary" 
+                      (click)="onAdd()"
+                      [disabled]="!step3Form.get('doc')?.valid">Add</button>
+                    </div>
                   </div>
-                  <label for="organization" class="mt-2 col-sm-4 col-form-label">Issuing Organization:</label>
-                  <div class="mt-2 col-sm-7">
-                    <input                 
-                    type="text"
-                    id="organization"
-                    class="form-control "
-                    formControlName="org">
-                  </div>
-                  <label for="type" class="mt-2 col-sm-4 col-form-label">Type:</label>
-                  <div class="mt-2 col-sm-7">
-                    <input                 
-                    type="text"
-                    id="type"
-                    class="form-control "
-                    formControlName="type">
-                  </div>
-                  <label for="valid" class="mt-2 col-sm-4 col-form-label">Valid Till:</label>
-                  <div class="mt-2 col-sm-7">
-                    <input                 
-                    type="date"
-                    id="valid"
-                    class="form-control "
-                    formControlName="valid">
-                  </div>
-                  <div class="mt-2 col-sm-11">
-                  <input 
-                  type="link" 
-                  id="verification" 
-                  class="form-control"
-                  formControlName="verificationLink"
-                  placeholder="Verification Link">
-                  </div>
-                  <div class="col-sm-1 ">
-                    <button type="button" class="btn btn-primary" 
-                    (click)="onAdd()"
-                    [disabled]="!step3Form.get('doc')?.valid">Add</button>
-                  </div>
-                </div>
-            </div>
+              </div>
+
+            </fieldset>
+            
             
             <div class="row">
               <div class="item-list">

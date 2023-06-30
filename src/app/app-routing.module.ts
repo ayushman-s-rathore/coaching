@@ -5,10 +5,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { Step1Component } from './sign-up/step1/step1.component';
 import { Step2Component } from './sign-up/step2/step2.component';
 import { Step3Component } from './sign-up/step3/step3.component';
+import { VerifyComponent } from './sign-up/verify/verify.component';
 
 
 const routes: Routes = [
   { path: '', component: SignUpComponent },
+  { path: 'verify', component: VerifyComponent },
   { path: 'coach', component: CoachSignupComponent },
   { path: 'step1', component: Step1Component},
   { path: 'step2', component: Step2Component},

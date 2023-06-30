@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -9,6 +9,9 @@ import { CoachSignupComponent } from './sign-up/coach-signup/coach-signup.compon
 import { Step1Component } from './sign-up/step1/step1.component';
 import { Step2Component } from './sign-up/step2/step2.component';
 import { Step3Component } from './sign-up/step3/step3.component';
+import { VerifyComponent } from './sign-up/verify/verify.component';
+import { AuthInterceptor } from './shared/authconfig.interceptor';
+
 
 
 
@@ -19,7 +22,9 @@ import { Step3Component } from './sign-up/step3/step3.component';
     CoachSignupComponent,
     Step1Component,
     Step2Component,
-    Step3Component
+    Step3Component,
+    VerifyComponent,
+
   
   
   ],
@@ -30,7 +35,11 @@ import { Step3Component } from './sign-up/step3/step3.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

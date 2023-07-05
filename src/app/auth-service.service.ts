@@ -25,7 +25,7 @@ export class AuthenticationService {
     }
 
     verify(email: string, code:string) {
-        return this.http.post<any>(`api/verify` + email, code)
+        return this.http.post<any>('api/verify' + email, code)
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));

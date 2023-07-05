@@ -1,55 +1,43 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+
 import { Coach } from './models/coach.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthServiceService {
+@Injectable({ providedIn: 'root' })
+export class AuthenticationService {
+    private userSubject: BehaviorSubject<Coach | null>;
+    public user: Observable<Coach | null>;
 
-  endpoint: string = 'http://localhost:4000/api';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
-  currentUser = {};
-  constructor(private http: HttpClient,
-              public router: Router) {}
-
-  signUp(user: Coach){
-    let api = `${this.endpoint}/register-user`;
-    return this.http
-    .post<any>(api, user).pipe(catchError(this.handleError))
-    .subscribe((res: any) => {
-      localStorage.setItem('access_token', res.token);
-      this.getUserProfile(res._id).subscribe((res) => {
-        this.currentUser = res;
-        this.router.navigate(['user-profile/' + res.msg._id]);
-      });
-    });;
-  }
-
-  getToken() {
-    return localStorage.getItem('access_token');
-  }
-  getUserProfile(id: any): Observable<any> {
-    let api = `${this.endpoint}/user-profile/${id}`;
-    return this.http.get(api, { headers: this.headers }).pipe(
-      map((res) => {
-        return res || {};
-      }),
-      catchError(this.handleError)
-    );
-  }
-
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    constructor(
+        private router: Router,
+        private http: HttpClient
+    ) {
+        this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+        this.user = this.userSubject.asObservable();
     }
-    return throwError(msg);
-  }
+
+    public get userValue() {
+        return this.userSubject.value;
+    }
+
+    verify(email: string, code:string) {
+        return this.http.post<any>(`api/verify` + email, code)
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+                this.userSubject.next(user);
+                return user;
+            }));
+    }
+
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('user');
+        this.userSubject.next(null);
+        this.router.navigate(['/login']);
+    }
 }

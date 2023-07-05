@@ -10,7 +10,8 @@ import { Step1Component } from './sign-up/step1/step1.component';
 import { Step2Component } from './sign-up/step2/step2.component';
 import { Step3Component } from './sign-up/step3/step3.component';
 import { VerifyComponent } from './sign-up/verify/verify.component';
-import { AuthInterceptor } from './shared/authconfig.interceptor';
+import { JwtInterceptor } from './helper/jwt.interceptor';
+
 
 
 
@@ -35,11 +36,9 @@ import { AuthInterceptor } from './shared/authconfig.interceptor';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-  }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,8 +9,9 @@ import { VerifyComponent } from './sign-up/verify/verify.component';
 
 
 const routes: Routes = [
-  { path: '', component: SignUpComponent },
-  { path: 'verify', component: VerifyComponent },
+  { path: '', redirectTo: '/signup', pathMatch: 'full'  },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'verify/:email', component: VerifyComponent },
   { path: 'coach', component: CoachSignupComponent },
   { path: 'step1', component: Step1Component},
   { path: 'step2', component: Step2Component},

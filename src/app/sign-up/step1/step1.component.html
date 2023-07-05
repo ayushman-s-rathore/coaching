@@ -7,7 +7,7 @@
                 <button (click)="onUpload()">Upload</button>
             </div><br>
             <form (ngSubmit)="onSubmit(user)" #user="ngForm" >
-                <fieldset>
+             
 
                 <div class="form-group">
                   <label for="about-me">About Me:</label>
@@ -90,39 +90,8 @@
                     </select><br>
                     <span class="help-block" >required</span>
                 </div>
-                <div class="form-group">
-                    <select 
-                    id="social" 
-                    name="social" 
-                    #sAcc="ngModel"
-                    [(ngModel)]="selectedSocial">
-                    <option value="">-- Choose an Account --</option>
-                    <option *ngFor="let acc of socialMedias" [value]="acc">{{ acc }}</option>
-                    </select>
-                    <input
-                    class="mx-3" 
-                    type="url" 
-                    id="socialLink" 
-                    name="socialLink"
-                    #sLink="ngModel"
-                    [(ngModel)]="socialLink">
-                    <button 
-                    type="button" 
-                    class="btn btn-primary" 
-                    (click)="onAdd()"
-                    [disabled]="sLink.pristine || sAcc.pristine">Add</button>
-                </div>
-                <div class="row">
-                    <div class="col form-group">
-                        <ul class="list-group ">
-                            <li class="list-group-item"
-                            *ngFor="let social of socialHandle">
-                            {{social.name}} {{social.link}} </li>
-                        </ul>
-                    </div>
-                </div>
-            </fieldset>
-                <div class="row justify-content-end mt-5">
+          
+                <div class="row justify-content-end mt-3">
                     <button 
                     type="submit" 
                     class="btn btn-primary btn-block col-md-3"

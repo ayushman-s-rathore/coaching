@@ -28,10 +28,12 @@ export class CoachSignupComponent {
     this.user.name=this.coachData.value.name;
     this.user.email=this.coachData.value.email;
     this.user.password=this.coachData.value.password;
-    this.userService.postData(cUrl,this.user);
+    this.userService.postData(cUrl,this.user).subscribe(
+      data=> console.log(data)
+    );
     const enc=btoa(email);
     
-    this.router.navigate(['/verify', enc]);
+    this.router.navigate(['/verify', email]);
   }
 
 }

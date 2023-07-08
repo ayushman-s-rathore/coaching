@@ -125,7 +125,7 @@ export class Step2Component implements OnInit {
     this.addEduToForm();
     this.addExpToForm();
     console.log(this.step2Form);
-    this.router.navigate(['/step3']);
+    // this.router.navigate(['/step3']);
   }
 
 

@@ -19,7 +19,7 @@ export class VerifyComponent implements OnInit {
   }
   onSubmit(code: string){
     const email=atob(this.route.snapshot.params['email']);
-    this.authSerice.verify(email,code)
+    this.authSerice.verify(email,code).subscribe()
     this.router.navigate(['/step1']);
   }
 }

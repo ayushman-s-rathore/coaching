@@ -17,7 +17,4 @@ export class Coach {
     skill?: {name:string}[];
     documents?: {type: string, title: string, orgName:string, valid: string,link:string}[];
 
-
-
-
 }
